@@ -11,8 +11,6 @@ namespace Aquarium.Model
 
         public Size FishSize { get; set; }
 
-        public int FishSpeed { get; set; }
-
         public DateTime LastEat { get; set; }
 
         public TimeSpan LifeTime { get; set; }
@@ -20,6 +18,16 @@ namespace Aquarium.Model
         public bool IsAlive 
         { 
             get => DateTime.Now.Subtract(LastEat) < LifeTime; 
+        }
+
+        public Fish(Bitmap fishIcon,Point spawnPos, Size fishSize, DateTime lastEat, TimeSpan lifeTime)
+        {
+            FishIcon = fishIcon;
+            FishIcon.MakeTransparent();
+            Position = spawnPos;
+            FishSize = fishSize;
+            LastEat = lastEat;
+            LifeTime = lifeTime;
         }
     }
 }

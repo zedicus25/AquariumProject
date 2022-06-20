@@ -14,5 +14,12 @@ namespace Aquarium.Model
         {
             get => new Rectangle(Position, FeedSize);
         }
+
+        public Feed(Point position, Size feedSize, int fallSpeed)
+        {
+            this.Position = position;
+            this.FeedSize = feedSize;
+            this.FallSpeed = fallSpeed;
+        }
     }
 }

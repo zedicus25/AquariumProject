@@ -15,14 +15,11 @@ namespace Aquarium.Controller
         private int _speed;
 
 
-        public FishController(Bitmap fishImage,TimeSpan lifeTime, int speed)
+        public FishController(Bitmap fishImage,TimeSpan lifeTime, int speed, int width, int height)
         {
-            _fish = new Fish();
-            _fish.FishIcon = fishImage;
-            _fish.FishIcon.MakeTransparent();
-            _fish.FishSize = new Size(50, 20);
-            _fish.LastEat = DateTime.Now;
-            _fish.LifeTime = lifeTime;
+            Random rnd = new Random();
+            _fish = new Fish(fishImage, new Point(rnd.Next(50,width-75), rnd.Next(20,height-35)), new Size(50, 20),
+                DateTime.Now, lifeTime);
             _speed = speed;
 
             _currentMove = MoveRight;
