@@ -12,6 +12,8 @@ namespace Aquarium.Controller
         public List<FishController> FishControllers { get; }
         public FeedController FeedController { get; }
 
+        public int Balance { get; private set; } = 0;
+
         public AquariumController()
         {
             FishControllers = new List<FishController>();
@@ -28,18 +30,33 @@ namespace Aquarium.Controller
         public void Move(int minX, int maxX, int maxY)
         {
             FeedController.Fall(maxY);
-
             if (FeedController.Feeds.Count > 0)
             {
                 for (int i = 0; i < FishControllers.Count; i++)
                 {
-                    FishControllers[i].MoveTo(FeedController.Feeds[0]);
+                    if (FishControllers[i].Fish.IsAlive)
+                        FishControllers[i].MoveTo(FeedController.Feeds[0]);
+                    else
+                    {
+                        Balance += FishControllers[i].SellPrice;
+                        FishControllers.Remove(FishControllers[i]);
+                        --i;
+                    }
                 }
             }
             else
             {
                 for (int i = 0; i < FishControllers.Count; i++)
-                    FishControllers[i].Move(minX, maxX);
+                {
+                    if (FishControllers[i].Fish.IsAlive)
+                        FishControllers[i].Move(minX, maxX);
+                    else
+                    {
+                        Balance += FishControllers[i].SellPrice;
+                        FishControllers.Remove(FishControllers[i]);
+                        --i;
+                    }
+                }
             }
 
             for (int i = 0; i < FeedController.Feeds.Count; i++)

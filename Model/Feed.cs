@@ -19,6 +19,7 @@ namespace Aquarium.Model
         public Feed(Bitmap image,Point position, Size feedSize, int fallSpeed)
         {
             FeedImage = new Bitmap(image, feedSize);
+            FeedImage.MakeTransparent();
             Position = position;
             FeedSize = feedSize;
             FallSpeed = fallSpeed;

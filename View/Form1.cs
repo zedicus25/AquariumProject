@@ -1,13 +1,7 @@
 ﻿using Aquarium.Controller;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Aquarium.View
@@ -18,7 +12,7 @@ namespace Aquarium.View
         private Graphics _graphics;
         private Bitmap _bufferedImage;
 
-        private Thread thread;
+        private Thread _moveThread;
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +29,8 @@ namespace Aquarium.View
             _graphics.DrawImage(Properties.Resources.back, this.ClientRectangle);
             _aquariumController.Move(10, Width,Height);
 
+            _graphics.DrawString($"Balance = {_aquariumController.Balance}", new Font("Times New Roman", 14, FontStyle.Bold), Brushes.DarkMagenta, new Point(10, 10));
+
             for (int i = 0; i < _aquariumController.FishControllers.Count; i++)
             {
                 this._graphics.DrawImage(_aquariumController.FishControllers[i].Fish.FishIcon, _aquariumController.FishControllers[i].Fish.Position);
@@ -50,9 +46,9 @@ namespace Aquarium.View
         private void Start()
         {
 
-            thread = new Thread(new ThreadStart(MovingStart));
-            thread.IsBackground = true;
-            thread.Start();
+            _moveThread = new Thread(new ThreadStart(MovingStart));
+            _moveThread.IsBackground = true;
+            _moveThread.Start();
         }
 
         private void MovingStart()
@@ -71,7 +67,7 @@ namespace Aquarium.View
         {
             _aquariumController.AddFish(new FishController(
                 new Bitmap(Image.FromFile(@"F:\Project C#\Aquarium\Resources\fish.png")), 
-                new TimeSpan(0, 2, 0), 5, Width, Height));
+                new TimeSpan(0, 0, 10), 5, Width, Height));
         }
 
         private void addFeedBtn_Click(object sender, EventArgs e)

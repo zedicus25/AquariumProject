@@ -15,6 +15,20 @@ namespace Aquarium.Controller
         private event Action<int> _currentMove;
         private int _speed;
 
+        public DateTime DeathTime { get; set; }
+        public DateTime SpawnTime { get; set; }
+
+        public int SellPrice
+        {
+            get
+            {
+                if (DeathTime < SpawnTime)
+                    return Convert.ToInt32(DateTime.Now.Subtract(SpawnTime).TotalSeconds);
+                else
+                    return Convert.ToInt32(DeathTime.Subtract(SpawnTime).TotalSeconds);
+            }
+        }
+
 
         public FishController(Bitmap fishImage,TimeSpan lifeTime, int speed, int width, int height)
         {
@@ -22,8 +36,9 @@ namespace Aquarium.Controller
             Fish = new Fish(fishImage, new Point(rnd.Next(50,width-75), rnd.Next(20,height-35)), new Size(50, 20),
                 DateTime.Now, lifeTime);
             _speed = speed;
-
+            SpawnTime = DateTime.Now;
             _currentMove = MoveRight;
+                Fish.FishIcon.RotateFlip(RotateFlipType.Rotate180FlipY);
         }
 
         public void Move(int minX, int maxX)
@@ -32,11 +47,13 @@ namespace Aquarium.Controller
             if (_currentMove == MoveRight && (Fish.Position.X + _speed >= maxX))
             {
                 _currentMove = MoveLeft;
+                Fish.FishIcon.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
 
             else if (_currentMove == MoveLeft && (Fish.Position.X + _speed <= minX))
             {
                 _currentMove = MoveRight;
+                Fish.FishIcon.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
 
             _currentMove?.Invoke(_speed);
