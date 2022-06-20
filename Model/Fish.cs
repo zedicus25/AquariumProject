@@ -22,7 +22,7 @@ namespace Aquarium.Model
 
         public Fish(Bitmap fishIcon,Point spawnPos, Size fishSize, DateTime lastEat, TimeSpan lifeTime)
         {
-            FishIcon = fishIcon;
+            FishIcon = new Bitmap(fishIcon, fishSize);
             FishIcon.MakeTransparent();
             Position = spawnPos;
             FishSize = fishSize;

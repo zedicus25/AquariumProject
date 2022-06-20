@@ -9,17 +9,19 @@ namespace Aquarium.Model
         public Size FeedSize { get; set; }
 
         public int FallSpeed { get; set; }
+        public Bitmap FeedImage { get; set; }
 
         public Rectangle Bounds
         {
             get => new Rectangle(Position, FeedSize);
         }
 
-        public Feed(Point position, Size feedSize, int fallSpeed)
+        public Feed(Bitmap image,Point position, Size feedSize, int fallSpeed)
         {
-            this.Position = position;
-            this.FeedSize = feedSize;
-            this.FallSpeed = fallSpeed;
+            FeedImage = new Bitmap(image, feedSize);
+            Position = position;
+            FeedSize = feedSize;
+            FallSpeed = fallSpeed;
         }
     }
 }

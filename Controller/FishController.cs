@@ -1,24 +1,25 @@
 ﻿using Aquarium.Model;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aquarium.Controller
 {
     public class FishController
     {
-        private event Action _currentMove;
-        private Fish _fish;
+        public Fish Fish { get; set; }
+
+        public Rectangle FishRectangle
+        {
+            get => new Rectangle(Fish.Position, Fish.FishSize);
+        }
+        private event Action<int> _currentMove;
         private int _speed;
 
 
         public FishController(Bitmap fishImage,TimeSpan lifeTime, int speed, int width, int height)
         {
             Random rnd = new Random();
-            _fish = new Fish(fishImage, new Point(rnd.Next(50,width-75), rnd.Next(20,height-35)), new Size(50, 20),
+            Fish = new Fish(fishImage, new Point(rnd.Next(50,width-75), rnd.Next(20,height-35)), new Size(50, 20),
                 DateTime.Now, lifeTime);
             _speed = speed;
 
@@ -28,62 +29,63 @@ namespace Aquarium.Controller
         public void Move(int minX, int maxX)
         {
 
-            if (_currentMove == MoveRight && (_fish.Position.X + _speed >= maxX))
+            if (_currentMove == MoveRight && (Fish.Position.X + _speed >= maxX))
             {
                 _currentMove = MoveLeft;
             }
 
-            else if (_currentMove == MoveLeft && (_fish.Position.X + _speed <= minX))
+            else if (_currentMove == MoveLeft && (Fish.Position.X + _speed <= minX))
             {
                 _currentMove = MoveRight;
             }
 
+            _currentMove?.Invoke(_speed);
         }
 
 
         public void MoveTo(Feed feed)
         {
 
-            if (_fish.Position.X + _fish.FishSize.Width / 2 < feed.Position.X)
+            if (Fish.Position.X + Fish.FishSize.Width / 2 < feed.Position.X)
             {
                 _currentMove = MoveRight;
-                return;
             }
 
-            if (_fish.Position.X > feed.Position.X)
+            if (Fish.Position.X > feed.Position.X)
             {
                 _currentMove = MoveLeft;
-                return;
             }
 
-            if (_fish.Position.Y + _fish.FishSize.Height / 2 < feed.Position.Y)
+            if (Fish.Position.Y + Fish.FishSize.Height / 2 < feed.Position.Y)
             {
                 _currentMove = MoveDown;
-                return;
             }
 
-            if (_fish.Position.Y > feed.Position.Y + feed.FeedSize.Height / 2)
+            if (Fish.Position.Y > feed.Position.Y + feed.FeedSize.Height)
             {
                 _currentMove = MoveUp;
-                return;
             }
+            _currentMove?.Invoke(_speed*3);
         }
 
-        private void MoveRight()
+        public bool CanEat(Feed feed) => (Fish.IsAlive && this.FishRectangle.IntersectsWith(feed.Bounds));
+
+
+        private void MoveRight(int speed)
         {
-            _fish.Position = new Point(_fish.Position.X + _speed, _fish.Position.Y);
+            Fish.Position = new Point(Fish.Position.X + speed, Fish.Position.Y);
         }
-        private void MoveLeft()
+        private void MoveLeft(int speed)
         {
-            _fish.Position = new Point(_fish.Position.X - _speed, _fish.Position.Y);
+            Fish.Position = new Point(Fish.Position.X - speed, Fish.Position.Y);
         }
-        private void MoveUp()
+        private void MoveUp(int speed)
         {
-            _fish.Position = new Point(_fish.Position.X, _fish.Position.Y - _speed);
+            Fish.Position = new Point(Fish.Position.X, Fish.Position.Y - speed);
         }
-        private void MoveDown()
+        private void MoveDown(int speed)
         {
-            _fish.Position = new Point(_fish.Position.X, _fish.Position.Y + _speed);
+            Fish.Position = new Point(Fish.Position.X, Fish.Position.Y + speed);
         }
     }
 }
