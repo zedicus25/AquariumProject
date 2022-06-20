@@ -15,16 +15,17 @@ namespace Aquarium.Model
 
         public TimeSpan LifeTime { get; set; }
 
+        public string Name { get; set; }
+
         public bool IsAlive 
         { 
             get => DateTime.Now.Subtract(LastEat) < LifeTime; 
         }
 
-        public Fish(Bitmap fishIcon,Point spawnPos, Size fishSize, DateTime lastEat, TimeSpan lifeTime)
+        public Fish(Bitmap fishIcon, Size fishSize, DateTime lastEat, TimeSpan lifeTime)
         {
             FishIcon = new Bitmap(fishIcon, fishSize);
             FishIcon.MakeTransparent();
-            Position = spawnPos;
             FishSize = fishSize;
             LastEat = lastEat;
             LifeTime = lifeTime;

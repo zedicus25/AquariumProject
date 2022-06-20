@@ -12,7 +12,7 @@ namespace Aquarium.Controller
         public List<FishController> FishControllers { get; }
         public FeedController FeedController { get; }
 
-        public int Balance { get; private set; } = 0;
+        public int Balance { get; set; } = 0;
 
         public AquariumController()
         {

@@ -1,6 +1,8 @@
 ﻿using Aquarium.Controller;
+using Aquarium.Model.Fishes;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -21,6 +23,8 @@ namespace Aquarium.View
             _graphics = Graphics.FromImage(_bufferedImage);
              this.DoubleBuffered = true;
             _aquariumController = new AquariumController();
+            if(File.Exists("data.txt"))
+                _aquariumController.Balance = Convert.ToInt32(File.ReadAllText("data.txt"));
             
         }
 
@@ -65,9 +69,7 @@ namespace Aquarium.View
 
         private void addFishBtn_Click(object sender, EventArgs e)
         {
-            _aquariumController.AddFish(new FishController(
-                new Bitmap(Image.FromFile(@"F:\Project C#\Aquarium\Resources\fish.png")), 
-                new TimeSpan(0, 0, 10), 5, Width, Height));
+            _aquariumController.AddFish(new FishController(new GoldFish(), 5, Width, Height));
         }
 
         private void addFeedBtn_Click(object sender, EventArgs e)
@@ -79,6 +81,11 @@ namespace Aquarium.View
         private void Form1_Load(object sender, EventArgs e)
         {
             Start();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            File.WriteAllText("data.txt", _aquariumController.Balance.ToString());
         }
     }
 }

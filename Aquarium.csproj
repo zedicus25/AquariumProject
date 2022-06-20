@@ -49,6 +49,7 @@
     <Compile Include="Controller\AquariumController.cs" />
     <Compile Include="Controller\FeedController.cs" />
     <Compile Include="Controller\FishController.cs" />
+    <Compile Include="Model\Fishes\GoldFish.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +91,10 @@
     <Content Include="Resources\apple.png" />
     <Content Include="Resources\back.jpg" />
     <Content Include="Resources\fish.png" />
+    <Content Include="Resources\fish1.png" />
+    <Content Include="Resources\fish2.png" />
+    <Content Include="Resources\fish3.png" />
+    <Content Include="Resources\fish4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -30,15 +30,14 @@ namespace Aquarium.Controller
         }
 
 
-        public FishController(Bitmap fishImage,TimeSpan lifeTime, int speed, int width, int height)
+        public FishController(Fish f, int speed, int width, int height)
         {
             Random rnd = new Random();
-            Fish = new Fish(fishImage, new Point(rnd.Next(50,width-75), rnd.Next(20,height-35)), new Size(50, 20),
-                DateTime.Now, lifeTime);
+            Fish = f;
+            Fish.Position = new Point(rnd.Next(50, width - 75), rnd.Next(20, height - 35));
             _speed = speed;
             SpawnTime = DateTime.Now;
             _currentMove = MoveRight;
-                Fish.FishIcon.RotateFlip(RotateFlipType.Rotate180FlipY);
         }
 
         public void Move(int minX, int maxX)
