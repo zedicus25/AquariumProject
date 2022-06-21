@@ -5,6 +5,8 @@ namespace Aquarium.Model
 {
     public class Fish
     {
+       
+
         public Bitmap FishIcon { get; set; }
 
         public Point Position { get; set; }
@@ -16,6 +18,8 @@ namespace Aquarium.Model
         public TimeSpan LifeTime { get; set; }
 
         public string Name { get; set; }
+        public int Cost { get; set; }
+        public int Speed { get; set; }
 
         public bool IsAlive 
         { 
@@ -29,6 +33,13 @@ namespace Aquarium.Model
             FishSize = fishSize;
             LastEat = lastEat;
             LifeTime = lifeTime;
+        }
+
+        public Fish(Fish fish) : this(fish.FishIcon, fish.FishSize, fish.LastEat, fish.LifeTime)
+        {
+            this.Name = fish.Name;
+            this.Cost = fish.Cost;
+            this.Speed = fish.Speed;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Aquarium.Controller;
+using Aquarium.Model;
 using Aquarium.Model.Fishes;
 using System;
 using System.Drawing;
@@ -8,16 +9,20 @@ using System.Windows.Forms;
 
 namespace Aquarium.View
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private AquariumController _aquariumController;
         private Graphics _graphics;
         private Bitmap _bufferedImage;
 
+        private AddingForm _addingForm;
+
+
         private Thread _moveThread;
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+            _addingForm = new AddingForm();
             this.BackgroundImageLayout = ImageLayout.Center;
             _bufferedImage = new Bitmap(this.Width, this.Height);
             _graphics = Graphics.FromImage(_bufferedImage);
@@ -69,7 +74,10 @@ namespace Aquarium.View
 
         private void addFishBtn_Click(object sender, EventArgs e)
         {
-            _aquariumController.AddFish(new FishController(new GoldFish(), 5, Width, Height));
+            _addingForm.ShowDialog();
+            Fish f = _addingForm.SelectedFish;
+            if( f!=null )
+                _aquariumController.AddFish(new FishController(f, f.Speed, Width, Height));
         }
 
         private void addFeedBtn_Click(object sender, EventArgs e)

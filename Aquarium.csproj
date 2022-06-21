@@ -49,12 +49,33 @@
     <Compile Include="Controller\AquariumController.cs" />
     <Compile Include="Controller\FeedController.cs" />
     <Compile Include="Controller\FishController.cs" />
+    <Compile Include="Model\Fishes\BlueFish.cs" />
+    <Compile Include="Model\Fishes\FishClown.cs" />
     <Compile Include="Model\Fishes\GoldFish.cs" />
-    <Compile Include="View\Form1.cs">
+    <Compile Include="Model\Fishes\TropicalFish.cs" />
+    <Compile Include="View\BuyingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\BuyingControl.Designer.cs">
+      <DependentUpon>BuyingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="View\AddingForm.Designer.cs">
+      <DependentUpon>AddingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FishControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\FishControl.Designer.cs">
+      <DependentUpon>FishControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Feed.cs" />
     <Compile Include="Model\Fish.cs" />
@@ -70,8 +91,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="View\AddingForm.resx">
+      <DependentUpon>AddingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BuyingControl.resx">
+      <DependentUpon>BuyingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FishControl.resx">
+      <DependentUpon>FishControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

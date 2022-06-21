@@ -28,12 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.buyingControl1 = new Aquarium.View.BuyingControl();
+            this.SuspendLayout();
+            // 
+            // buyingControl1
+            // 
+            this.buyingControl1.Location = new System.Drawing.Point(12, 12);
+            this.buyingControl1.Name = "buyingControl1";
+            this.buyingControl1.Size = new System.Drawing.Size(318, 329);
+            this.buyingControl1.TabIndex = 0;
+            // 
+            // AddingForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(342, 353);
+            this.Controls.Add(this.buyingControl1);
+            this.Name = "AddingForm";
             this.Text = "AddingForm";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private BuyingControl buyingControl1;
     }
 }

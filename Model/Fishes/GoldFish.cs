@@ -13,6 +13,7 @@ namespace Aquarium.Model.Fishes
             base(new Bitmap(Image.FromFile(@"F:\Project C#\Aquarium\Resources\fish2.png")), new Size(50,35), DateTime.Now, new TimeSpan(0,0,35))
         {
             this.Name = "Gold Fish";
+            this.Speed = 5;
         }
     }
 }
