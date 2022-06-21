@@ -22,7 +22,6 @@ namespace Aquarium.View
         public MainForm()
         {
             InitializeComponent();
-            _addingForm = new AddingForm();
             this.BackgroundImageLayout = ImageLayout.Center;
             _bufferedImage = new Bitmap(this.Width, this.Height);
             _graphics = Graphics.FromImage(_bufferedImage);
@@ -30,6 +29,7 @@ namespace Aquarium.View
             _aquariumController = new AquariumController();
             if(File.Exists("data.txt"))
                 _aquariumController.Balance = Convert.ToInt32(File.ReadAllText("data.txt"));
+            _addingForm = new AddingForm(_aquariumController);
             
         }
 
@@ -76,8 +76,11 @@ namespace Aquarium.View
         {
             _addingForm.ShowDialog();
             Fish f = _addingForm.SelectedFish;
-            if( f!=null )
+            if( f!=null)
+            {
+                _graphics.DrawString($"Balance = {_aquariumController.Balance}", new Font("Times New Roman", 14, FontStyle.Bold), Brushes.DarkMagenta, new Point(10, 10));
                 _aquariumController.AddFish(new FishController(f, f.Speed, Width, Height));
+            }
         }
 
         private void addFeedBtn_Click(object sender, EventArgs e)

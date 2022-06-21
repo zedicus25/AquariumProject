@@ -10,6 +10,7 @@ namespace Aquarium.Model.Fishes
         {
             this.Name = "Clown Fish";
             this.Speed = 7;
+            this.Cost = 50;
         }
     }
 }

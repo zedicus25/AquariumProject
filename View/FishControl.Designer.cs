@@ -31,6 +31,7 @@
             this.nameL = new System.Windows.Forms.Label();
             this.saveBtn = new System.Windows.Forms.Button();
             this.fishPB = new System.Windows.Forms.PictureBox();
+            this.costL = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fishPB)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,10 +65,20 @@
             this.fishPB.TabIndex = 0;
             this.fishPB.TabStop = false;
             // 
+            // costL
+            // 
+            this.costL.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.costL.Location = new System.Drawing.Point(9, 123);
+            this.costL.Name = "costL";
+            this.costL.Size = new System.Drawing.Size(69, 39);
+            this.costL.TabIndex = 3;
+            this.costL.Text = "label1";
+            // 
             // FishControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.costL);
             this.Controls.Add(this.nameL);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.fishPB);
@@ -83,5 +94,6 @@
         private System.Windows.Forms.PictureBox fishPB;
         private System.Windows.Forms.Label nameL;
         private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Label costL;
     }
 }

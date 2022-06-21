@@ -14,6 +14,7 @@ namespace Aquarium.Model.Fishes
         {
             this.Name = "Gold Fish";
             this.Speed = 5;
+            this.Cost = 30;
         }
     }
 }

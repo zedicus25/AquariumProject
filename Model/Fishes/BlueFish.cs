@@ -10,6 +10,7 @@ namespace Aquarium.Model.Fishes
         {
             this.Name = "Blue Fish";
             this.Speed = 8;
+            this.Cost = 800;
         }
     }
 }
