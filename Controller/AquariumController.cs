@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,14 @@ namespace Aquarium.Controller
         public List<FishController> FishControllers { get; }
         public FeedController FeedController { get; }
 
-        public int Balance { get; set; } = 0;
+        public int Balance { get; set; } = 1000;
 
         public AquariumController()
         {
             FishControllers = new List<FishController>();
-            FeedController = new FeedController(new Bitmap(Image.FromFile(@"F:\Project C#\Aquarium\Resources\apple.png")));
+            FeedController = new FeedController(new Bitmap(Image.FromFile(@"F:\Project C#\Aquarium\Resources\feed.png")));
+            if (File.Exists("data.txt"))
+                Balance = Convert.ToInt32(File.ReadAllText("data.txt"));
         }
 
         public void AddFood(Point pos) => FeedController.AddFeed(pos);

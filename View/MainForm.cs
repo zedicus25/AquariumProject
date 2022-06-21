@@ -27,8 +27,6 @@ namespace Aquarium.View
             _graphics = Graphics.FromImage(_bufferedImage);
              this.DoubleBuffered = true;
             _aquariumController = new AquariumController();
-            if(File.Exists("data.txt"))
-                _aquariumController.Balance = Convert.ToInt32(File.ReadAllText("data.txt"));
             _addingForm = new AddingForm(_aquariumController);
             
         }
